@@ -1,0 +1,439 @@
+body {
+	position: relative;
+
+	.mini-sections {
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		z-index: 5;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: all 500ms ease;
+
+		.mini-section {
+			width: 50vw;
+			height: 50vh;
+			background: $white;
+			display: flex;
+			text-align: center;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+
+			span {
+				font-size: 2rem;
+			}
+		}
+
+		#section-one {
+			background: $white;
+
+			span {
+				transform: rotate(-45deg);
+			}
+		}
+
+		#section-two {
+			background: $white;
+
+			span {
+				transform: rotate(45deg);
+			}
+		}
+
+		#section-three {
+			background: $white;
+
+			span {
+				transform: rotate(-120deg);
+			}
+		}
+
+		#section-four {
+			background: $white;
+
+			span {
+				transform: rotate(120deg);
+			}
+		}
+	}
+
+	.burger-clicked {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: all;
+		transition: all 500ms ease;
+	}
+
+	.burger {
+		display: none;
+		@include mini {
+			display: block;
+			cursor: pointer;
+			position: fixed;
+			top: 2vh;
+			right: 10vw;
+			z-index: 20;
+		}
+
+		div {
+			margin: 6px 0;
+			background: $black;
+			width: 30px;
+			height: 2px;
+			border-radius: 5px;
+			transition: all 500ms ease;
+		}
+	}
+
+	.hide-burger {
+		@include mini {
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+		}
+	}
+
+	.toggle-burger .line1 {
+		transform: rotate(45deg) translate(5px, 5px);
+		height: 1px;
+		transition: all 500ms ease;
+	}
+
+	.toggle-burger .line2 {
+		opacity: 0;
+		transition: all 500ms ease;
+	}
+
+	.toggle-burger .line3 {
+		transform: rotate(-45deg) translate(5px, -5px);
+		height: 1px;
+		transition: all 500ms ease;
+	}
+
+	#fixed-logo {
+		position: fixed;
+		width: 6vw;
+		top: 2vh;
+		left: 5vw;
+		z-index: 5;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+
+		@include mini {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: all;
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+
+	.vendor-popup {
+		position: fixed;
+		background: $white;
+		width: 75vw;
+		height: 95vh;
+		top: 5%;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 10;
+		box-shadow: 1px 1px 35px rgba($black, 0.2);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		display: none;
+		overflow: hidden;
+
+		@include tablet {
+			width: 100vw;
+			left: 0;
+			top: 0;
+			transform: translateX(0);
+			height: 100vh;
+		}
+
+		& > i {
+			position: sticky;
+			top: 10%;
+			right: 10%;
+			font-size: 1.3rem;
+			border: 1px solid $black;
+			border-radius: 50%;
+			padding: 1rem;
+			transform: translate(50%, -50%);
+			cursor: pointer;
+			background: transparent;
+
+			&:hover {
+				background: rgba($white, 0.1);
+			}
+		}
+
+		& > h1 {
+			font-size: 6rem;
+			font-weight: 500;
+			width: 70%;
+			text-align: center;
+			margin: 0 auto 100px auto;
+
+			@include laptop {
+				font-size: 5rem;
+			}
+
+			@include mini {
+				font-size: 4rem;
+				margin-bottom: 50px;
+			}
+
+			@include tablet {
+				font-size: 3rem;
+			}
+		}
+
+		.popup-containers {
+			display: flex;
+			flex-direction: column;
+			padding: 5rem;
+
+			@include miniLaptop {
+				padding: 3rem;
+			}
+
+			.popup-container {
+				display: flex;
+				align-items: center;
+				text-align: left;
+
+				@include tablet {
+					flex-direction: column;
+					align-items: center;
+				}
+
+				img {
+					width: 50%;
+					height: 500px;
+					object-fit: cover;
+
+					@include miniLaptop {
+						height: 400px;
+					}
+
+					@include tablet {
+						width: 100%;
+					}
+				}
+
+				.text-container {
+					padding-left: 6rem;
+					width: 50%;
+
+					@include miniLaptop {
+						padding-left: 2rem;
+					}
+
+					@include tablet {
+						width: 100%;
+						padding: 3rem 0 3rem 2rem;
+					}
+
+					h2 {
+						font-size: 2.5rem;
+						width: 70%;
+
+						@include miniLaptop {
+							font-size: 2rem;
+							width: 100%;
+						}
+
+						@include tablet {
+							width: 70%;
+						}
+					}
+
+					.mini-containers {
+						margin-left: 20px;
+						.mini-container {
+							display: flex;
+							align-items: center;
+							margin: 30px 0;
+
+							@include miniLaptop {
+								margin: 15px 0;
+							}
+
+							@include tablet {
+								margin: 30px 0;
+							}
+
+							i {
+								margin-right: 10px;
+							}
+
+							p {
+								@include miniLaptop {
+									font-size: 0.9rem;
+								}
+
+								@include tablet {
+									font-size: 1rem;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			#second-popup-container {
+				img {
+					order: 2;
+
+					@include tablet {
+						order: initial;
+					}
+				}
+			}
+		}
+
+		& > h2 {
+			text-align: center;
+			font-size: 4rem;
+			padding: 5rem;
+
+			@include miniLaptop {
+				padding: 3rem;
+			}
+		}
+
+		form {
+			display: grid;
+			grid-template-areas:
+				"a b"
+				"c d"
+				"e f"
+				"g h"
+				"i i"
+				"j j"
+				"j j"
+				"k k";
+			padding: 5rem;
+			grid-row-gap: 25px;
+			grid-column-gap: 50px;
+
+			@include miniLaptop {
+				padding: 3rem;
+			}
+
+			@include tablet {
+				grid-template-areas:
+					"a a"
+					"b b"
+					"c c"
+					"d d"
+					"e e"
+					"f f"
+					"g g"
+					"h h"
+					"i i"
+					"j j"
+					"k k";
+			}
+
+			#business-name {
+				grid-area: a;
+			}
+
+			#foodretail {
+				grid-area: b;
+			}
+
+			#date {
+				grid-area: c;
+			}
+
+			#term-length {
+				grid-area: d;
+			}
+
+			#phone-popup {
+				grid-area: e;
+			}
+
+			#email-popup {
+				grid-area: f;
+			}
+
+			#instagram-popup {
+				grid-area: g;
+			}
+
+			#website-popup {
+				grid-area: h;
+			}
+
+			#link-popup {
+				grid-area: i;
+			}
+
+			#textarea-popup {
+				grid-area: j;
+			}
+
+			#submit-button-popup {
+				grid-area: k;
+				background: $black;
+				color: $white;
+			}
+
+			input,
+			select,
+			textarea {
+				border-radius: 0;
+				border: 1px solid $black;
+				padding-left: 1rem;
+				font-size: 1.1rem;
+				outline: none;
+
+				&::placeholder {
+					color: $black;
+					opacity: 1;
+					font-weight: 500;
+				}
+			}
+
+			input,
+			select {
+				height: 70px;
+				width: 100%;
+			}
+
+			select {
+				font-weight: 500;
+
+				div {
+					margin: 50px 0;
+				}
+			}
+
+			textarea {
+				padding-top: 1rem;
+			}
+		}
+	}
+
+	.show-popup {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: all;
+		display: block;
+	}
+}
+.accordion-button:not(.collapsed) {
+  color: $black;
+}

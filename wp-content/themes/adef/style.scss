@@ -1,0 +1,336 @@
+/*
+Theme Name: ADEF
+Text Domain: adef
+Version: 2.0
+Author: Dev Joe
+*/
+
+$page-dir: rtl;
+$max-tabs: 8;
+$tab-width: 50px;
+
+@import "./styles/colors";
+@import "./styles/media-query";
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+@if $page-dir == ltr {
+	@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
+	@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css");
+} @else {
+	@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap");
+	@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.rtl.min.css");
+}
+
+html::-webkit-scrollbar {
+	@include tablet {
+		display: none;
+	}
+}
+
+* {
+	@if $page-dir == ltr {
+		font-family: "Dosis", sans-serif;
+	} @else {
+		font-family: "Tajawal", sans-serif;
+	}
+}
+
+#lang-switcher {
+	display: none;
+	z-index: 9999;
+	i {
+		font-size: 3rem;
+		cursor: pointer;
+	}
+	span {
+		width: 80px;
+		height: 80px;
+		margin: 10px;
+		border: 1px solid $clr-active;
+		transition: all 0.3s ease-in-out;
+		text-align: center;
+		line-height: 70px;
+		font-size: 3rem;
+		cursor: pointer;
+		&:hover {
+			background-color: $clr-active;
+			color: $clr-primary;
+		}
+	}
+}
+img {
+	filter: grayscale(100);
+	transition: all 0.3s ease-in-out;
+	&:hover {
+		filter: grayscale(0);
+	}
+}
+
+html,
+body {
+	height: 100vh;
+	overflow: hidden;
+	@if $page-dir == ltr {
+		direction: ltr;
+	} @else {
+		direction: rtl;
+	}
+	@include tablet {
+		overflow: auto;
+	}
+	background: $clr-secondary;
+}
+
+/* LIST */
+ul.menu {
+	list-style: none;
+	& > li {
+		&:first-of-type {
+			label {
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: flex-start;
+				@include tablet {
+					flex-direction: row;
+
+					justify-content: center;
+					align-items: center;
+				}
+			}
+			.accslide {
+				overflow: hidden;
+			}
+		}
+		label {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			@if $page-dir == ltr {
+				float: left;
+			} @else {
+				float: right;
+			}
+			height: 100vh;
+			width: $tab-width;
+			@include tablet {
+				width: 100vw;
+				height: $tab-width;
+				border-left: 0;
+				border-right: 0;
+				border-top: 1px solid $clr-active;
+			}
+			@if $page-dir == ltr {
+				border-left: 1px solid $clr-active;
+			} @else {
+				border-right: 1px solid $clr-active;
+			}
+			background: $clr-primary;
+			text-align: center;
+			font-size: 1rem;
+			line-height: $tab-width - 10;
+			transition: background 300ms ease;
+
+			&:hover {
+				transition-duration: 0s;
+			}
+		}
+		input {
+			position: absolute;
+			top: -9999px;
+			@if $page-dir == ltr {
+				left: -9999px;
+			} @else {
+				right: -9999px;
+			}
+		}
+	}
+}
+
+/* FORM */
+// Hide the input
+
+// Make the label a vertical bar
+
+ul.menu > li > input + label {
+	background: $clr-secondary;
+}
+
+label:hover,
+ul.menu > li > input + label:hover {
+	background: $clr-hover;
+	color: $clr-secondary;
+	cursor: pointer;
+}
+
+label:first-of-type:hover,
+ul.menu > li:first-of-type > input + label:hover {
+	background: inherit;
+	color: inherit;
+	cursor: pointer;
+	@include tablet {
+		border-top: 0;
+	}
+}
+
+input[type="radio"]:checked ~ label {
+	background: $clr-active;
+	color: $clr-secondary;
+	cursor: default !important;
+	width: 0;
+	@if $page-dir == ltr {
+		border-right: 5px solid $clr-active;
+	} @else {
+		border-left: 5px solid $clr-active;
+	}
+	@include tablet {
+		border: 0;
+		height: 0;
+	}
+}
+
+ul.menu > li:first-of-type input[type="radio"]:checked ~ label {
+	background: inherit;
+	color: inherit;
+	cursor: default !important;
+	border: 0;
+}
+
+/* SLIDES */
+.accslide {
+	display: block;
+	height: 100vh;
+	@include tablet {
+		height: 0;
+		width: auto;
+	}
+	width: 0;
+	@if $page-dir == ltr {
+		float: left;
+	} @else {
+		float: right;
+	}
+	overflow-y: auto;
+	font-size: 1rem;
+	line-height: 1.5;
+	transition: all 700ms ease;
+	img {
+		margin-top: 10px;
+	}
+	.content {
+		min-height: 100%;
+	}
+}
+
+input[type="radio"]:not(:checked) ~ label > * {
+	@if $page-dir == ltr {
+		padding-left: 7px;
+		transform: rotate(-90deg);
+	} @else {
+		padding-right: 7px;
+		transform: rotate(90deg);
+	}
+	font-size: 1.2em;
+	white-space: nowrap;
+	@include tablet {
+		transform: rotate(0deg);
+	}
+}
+
+input[type="radio"]:checked ~ label > * {
+	@if $page-dir == ltr {
+		padding-left: 7px;
+		transform: rotate(-90deg);
+	} @else {
+		padding-right: 7px;
+		transform: rotate(90deg);
+	}
+	font-size: 1.2em;
+	white-space: nowrap;
+	display: none;
+	@include tablet {
+		transform: rotate(0deg);
+	}
+}
+
+@for $i from 2 through $max-tabs {
+	@for $j from 1 through $i {
+		li:nth-child(#{$j}):nth-last-child(#{$i - $j + 1})
+			input[type="radio"]:checked
+			~ .accslide {
+			width: calc(100vw - #{$i * $tab-width} + #{$tab-width - 15px});
+			@include tablet {
+				width: 100vw;
+				height: calc(100vh - $tab-width);
+			}
+		}
+	}
+}
+
+.accordion-button {
+	&::after {
+		background-image: none;
+	}
+	&:focus {
+		border-color: $clr-active;
+		outline: 0;
+		box-shadow: none;
+	}
+	&:not(.collapsed) {
+		color: $clr-secondary;
+		background-color: $clr-active;
+		&::after {
+			background-image: none;
+		}
+	}
+}
+
+.bg-active {
+	background-color: $clr-active;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
+}
+.wp-block-columns {
+	margin: 20px 0;
+}
+.wp-block-column {
+	margin: 0 20px;
+}
+
+.w-90 {
+	width: 90%;
+	margin: auto;
+}
+
+.bi-translate {
+	font-size: 1.7rem;
+	z-index: 999;
+	bottom: 10px;
+	@if $page-dir == ltr {
+		left: 10px;
+	} @else {
+		right: 10px;
+	}
+}
+
+.platform-link {
+	transition: all 0.3s ease-in-out;
+	&:hover {
+		background: $clr-active;
+		color: $clr-primary !important;
+	}
+}
+
+.space-item {
+	cursor: pointer;
+	&:hover {
+		img {
+			filter: grayscale(0);
+		}
+	}
+}
